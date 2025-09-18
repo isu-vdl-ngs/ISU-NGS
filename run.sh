@@ -252,7 +252,7 @@ trap handle_interrupt INT
                         fi
                 fi
                 else
-                    R1_PATH=$(get_r1_fastq "$sample" "$RAW_FASTQ_DIR")
+                    R1_PATH=$(get_r1_fastq "$sample" "$SAMPLE_DATA_PATH")
                     if [[ -z "$R1_PATH" ]]; then
                         log "Warning" "R1 not found for sample $sample"
                         continue
