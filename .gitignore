@@ -1,0 +1,16 @@
+# macOS and Linux
+.DS_Store
+Thumbs.db
+._*
+
+# Shell history or temp
+*.bak
+*.swp
+*.tmp
+
+# internal files / folders
+analysis/
+db/
+data/
+envs/
+results/
