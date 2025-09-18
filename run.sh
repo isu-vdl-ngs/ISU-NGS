@@ -128,6 +128,25 @@ trap handle_interrupt INT
     SAMPLES_CSV="$SAMPLE_ANALYSIS_PATH/samples.csv"
     TAXONOMY_CSV="$SAMPLE_ANALYSIS_PATH/taxonomy_template.csv"
 
+    # Create folders corresponding to samples using text before _R1/_R2
+    for r1_file in "$SAMPLE_DATA_PATH"/*_R1*.fastq.gz; do
+        # Skip if no files matched
+        [[ -e "$r1_file" ]] || continue
+
+        # Get filename without path
+        filename=$(basename "$r1_file")
+        # Extract sample name (everything before _R1)
+        sample_name="${filename%%_R1*}"
+
+        # Create sample specific folder
+        sample_dir="$SAMPLE_DATA_PATH/$sample_name"
+        mkdir -p "$sample_dir"
+
+        # Move R1 and R2 files into the folder
+        mv "$SAMPLE_DATA_PATH/${sample_name}_R1"*.fastq.gz "$sample_dir/" 2>/dev/null
+        mv "$SAMPLE_DATA_PATH/${sample_name}_R2"*.fastq.gz "$sample_dir/" 2>/dev/null
+    done
+
     if [[ -z "$TAXONOMY_FILE" ]]; then
         # First phase: no taxonomy provided. Assuming initial run. Generate sample list and taxonomy template
 
