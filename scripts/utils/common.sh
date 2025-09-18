@@ -26,8 +26,6 @@
 # Version:     1.0.0
 ###############################################################################
 
-set -euo pipefail
-
 # ------------------------
 # Get the project root directory
 # Works whether inside a Git repo or ZIP download

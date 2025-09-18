@@ -22,8 +22,6 @@
 # Read the following micromamba release for directions on its installation
 # https://github.com/mamba-org/micromamba-releases
 
-set -euo pipefail
-
 # Check if config file path is passed
 if [[ $# -lt 1 ]]; then
     echo "Usage: $0 /path/to/config.sh"

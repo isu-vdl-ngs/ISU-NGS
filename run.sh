@@ -34,8 +34,6 @@ trap handle_interrupt INT
 
 # Subshell to skip issue with other user defined env variables being unbound
 (
-    set -euo pipefail
-
     # Define project root as current working directory similar to setup.sh
     PROJECT_ROOT="$(pwd)"
 
@@ -227,7 +225,7 @@ trap handle_interrupt INT
                 multiqc "$FASTQC_AFTER_TRIM_DIR" -o "$MULTIQC_AFTER_TRIM_DIR"
 
                 # Add in results folder
-                cp -r "$MULTIQC_BEFORE_TRIM_DIR" "$SAMPLE_RESULTS_PATH"
+                cp -r "$MULTIQC_AFTER_TRIM_DIR" "$SAMPLE_RESULTS_PATH"
             fi
 
             # remove symlinks
@@ -265,6 +263,7 @@ trap handle_interrupt INT
                         continue
                     fi
                 fi
+
                 log "Info" "Running Kraken2 on $sample"
                 mkdir -p "$SAMPLE_ANALYSIS_PATH/kraken2"
                 kraken2 --db $PROJECT_ROOT/$KRAKEN2_DB_PATH --threads $THREADS --paired --gzip-compressed $R1_PATH $R2_PATH --output "$SAMPLE_ANALYSIS_PATH/kraken2/$sample"_classify --report "$SAMPLE_ANALYSIS_PATH/kraken2/$sample"_report
@@ -272,6 +271,7 @@ trap handle_interrupt INT
                 awk '$1 == "C" { $3 = ($3 == "9606" ? 0 : $3); print $2 "\t" $3 }' "$SAMPLE_ANALYSIS_PATH/kraken2/$sample"_classify > "$SAMPLE_ANALYSIS_PATH/kraken2/$sample"_krona_input.txt
                 log "Info" "Generating krona plot on $sample"
                 ktImportTaxonomy -o "$SAMPLE_ANALYSIS_PATH/kraken2/$sample"_krona.html "$SAMPLE_ANALYSIS_PATH/kraken2/$sample"_krona_input.txt
+
             done < <(tail -n +2 "$SAMPLES_CSV")
 
             log "Info" "Generate combined krona plot for the project"

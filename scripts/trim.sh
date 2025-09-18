@@ -18,8 +18,6 @@
 # Version:     1.0.0
 ###############################################################################
 
-set -euo pipefail
-
 if [[ $# -lt 5 ]]; then
   echo "Usage: bash trim.sh <R1.fastq.gz> <R2.fastq.gz> <sample_id> <data_folder> <trim_folder> <config_sh_path>"
   exit 1

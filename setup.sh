@@ -31,8 +31,6 @@ handle_interrupt() {
 # Set the trap for SIGINT (Ctrl+C)
 trap handle_interrupt INT
 
-set -euo pipefail
-
 # Define project root as current working directory
 PROJECT_ROOT="$(pwd)"
 
