@@ -30,7 +30,7 @@
 
 # Environment
 ENV_NAME="isu-ngs"
-VERSION="0.9.3"
+VERSION="0.9.4"
 
 # Tool Versions
 PYTHON_VERSION="3.13"
