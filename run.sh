@@ -79,7 +79,7 @@ trap handle_interrupt INT
         echo "  --taxonomy <file>       Path to taxonomy_template.csv"
         echo "  --no-trim               Skip trimming step"
         echo "  --kraken-from-trimmed   Use trimmed reads for Kraken2 & Krona"
-        echo "  --extract-from-trimmed  Use trimmed reads for Kraken2 & Krona"
+        echo "  --extract-from-trimmed  Use trimmed reads for de novo assembly"
         echo "  --no-kraken             Skip Kraken2/Krona"
         echo "  --no-fastqc             Skip FastQC/MultiQC"
         echo "  --no-extract            Skip extraction & assembly"

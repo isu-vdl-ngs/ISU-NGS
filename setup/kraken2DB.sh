@@ -58,7 +58,7 @@ REQUIRED_VARS=(
 
 # Loop through and check if each is defined and non-empty
 for var in "${REQUIRED_VARS[@]}"; do
-    if [[ -z "${!var:-}" ]]; then
+    if [[ -z "${!var+x}" ]]; then
         Log "ERROR" "$var is not set in config file"
         exit 1
     fi

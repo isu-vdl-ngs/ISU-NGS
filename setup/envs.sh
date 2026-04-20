@@ -59,27 +59,11 @@ REQUIRED_VARS=(
     ENVIRONMENT_ROOT
     VERSION
     PYTHON_VERSION
-    PERL_VERSION
-    FASTQC_VERSION
-    MULTIQC_VERSION
-    TRIMMOMATIC_VERSION
-    KRONA_VERSION
-    ENTREZ_DIRECT_VERSION
-    KRAKENTOOLS_VERSION
-    KRAKEN2_VERSION
-    SPADES_VERSION
-    BIOPYTHON_VERSION
-    QUALIMAP_VERSION
-    WGET_VERSION
-    SEQKIT_VERSION
-    SEQTK_VERSION
-    CURL_VERSION
-    GIT_VERSION
 )
 
 # Loop through and check if each is defined and non-empty
 for var in "${REQUIRED_VARS[@]}"; do
-  if [[ -z "${!var:-}" ]]; then
+  if [[ -z "${!var+x}" ]]; then
     Log "ERROR" "$var is not set in config file"
     exit 1
   fi
@@ -90,17 +74,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 ENVIRONMENT_PATH=${ENVIRONMENT_ROOT}/envs/ngs${VERSION}
 
-micromamba create -y -p $ENVIRONMENT_PATH -c conda-forge -c bioconda kraken2=$KRAKEN2_VERSION
+micromamba create -y -p $ENVIRONMENT_PATH -c conda-forge -c bioconda python=$PYTHON_VERSION
 
 eval "$(micromamba shell hook --shell bash)"
 micromamba activate $ENVIRONMENT_PATH
 
-micromamba install -y -c conda-forge -c bioconda \
-        kraken2=$KRAKEN2_VERSION python=$PYTHON_VERSION fastqc=$FASTQC_VERSION multiqc=$MULTIQC_VERSION \
-        trimmomatic=$TRIMMOMATIC_VERSION krona=$KRONA_VERSION entrez-direct=$ENTREZ_DIRECT_VERSION \
-        krakentools=$KRAKENTOOLS_VERSION wget=$WGET_VERSION seqkit=$SEQKIT_VERSION seqtk=$SEQTK_VERSION \
-        qualimap=$QUALIMAP_VERSION biopython=$BIOPYTHON_VERSION spades=$SPADES_VERSION perl=$PERL_VERSION \
-        curl=$CURL_VERSION git=$GIT_VERSION
+micromamba install -y -c conda-forge -c bioconda kraken2 fastqc multiqc trimmomatic krona \
+        entrez-direct krakentools wget seqkit seqtk qualimap biopython spades perl curl git
 
 log "Success" "Micromamba environment for ISU-NGS Pipeline at path: ${ENVIRONMENT_PATH}"
 log "Info" "Activate your environment by using the below commands:"
