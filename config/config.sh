@@ -31,7 +31,7 @@ set -euo pipefail
 
 # Environment
 ENV_NAME="isu-ngs"
-VERSION="0.9.6"
+VERSION="0.9.7"
 
 # Tool Versions
 PYTHON_VERSION="3.12"
