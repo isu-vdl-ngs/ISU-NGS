@@ -79,4 +79,3 @@ RUN_LOGS_DIR="logs/run"
 THREADS="4"
 
 # Others
-PROJECT_ROOT="/work/liganwu/ngslab/ISU-NGS"
