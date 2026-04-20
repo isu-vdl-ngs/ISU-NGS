@@ -70,6 +70,9 @@ trap handle_interrupt INT
     DATA_FOLDER=""
     SHOW_HELP=false
 
+    LOG_FILE="$PROJECT_ROOT/$SETUP_LOGS_DIR/run_$(date +%F_%H-%M-%S).log"
+    exec > >(tee -a "$LOG_FILE") 2>&1
+
     # Parse command line arguments
     print_usage() {
         echo "Usage: bash run.sh [OPTIONS]"
