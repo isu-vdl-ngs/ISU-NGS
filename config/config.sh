@@ -24,7 +24,6 @@
 # Requirements:
 #   - Bash 4+
 #
-# Version:     1.0.0
 ###############################################################################
 
 # only allow simple assignments
