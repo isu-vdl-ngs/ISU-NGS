@@ -74,7 +74,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 ENVIRONMENT_PATH=${ENVIRONMENT_ROOT}/envs/ngs${VERSION}
 
-micromamba create -y -p $ENVIRONMENT_PATH -c conda-forge -c bioconda python=$PYTHON_VERSION
+micromamba create -y -p $ENVIRONMENT_PATH -c conda-forge -c bioconda "python=${PYTHON_VERSION}"
 
 eval "$(micromamba shell hook --shell bash)"
 micromamba activate $ENVIRONMENT_PATH

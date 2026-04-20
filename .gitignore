@@ -14,3 +14,5 @@ db/
 data/
 envs/
 results/
+logs/
+config/config.sh.lock

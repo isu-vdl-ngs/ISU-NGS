@@ -27,10 +27,12 @@
 # Version:     1.0.0
 ###############################################################################
 
+# only allow simple assignments
+set -euo pipefail
 
 # Environment
 ENV_NAME="isu-ngs"
-VERSION="0.9.5"
+VERSION="0.9.6"
 
 # Tool Versions
 PYTHON_VERSION="3.12"
@@ -71,8 +73,11 @@ TRIM_ADAPTERS_FILE="scripts/utils/NexteraPE-PE.fa"
 DATA_DIR="data"
 ANALYSIS_DIR="analysis"
 RESULTS_DIR="results"
+SETUP_LOGS_DIR="logs/setup"
+RUN_LOGS_DIR="logs/run"
 
 # Process
-THREADS="16"
+THREADS="4"
 
 # Others
+PROJECT_ROOT="/work/liganwu/ngslab/ISU-NGS"

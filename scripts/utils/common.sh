@@ -48,18 +48,29 @@ get_project_root() {
 # Find if variable in config file, replace or add the variable
 # ------------------------
 update_config_variable() {
-    # Remove old variable if present in config
-    local varname=$1
-    local varvalue=$2
-    local configfile=$3
-    if [[ "$(uname)" == "Darwin" ]]; then
-        sed -i '' '/^$varname=/d' "$configfile"
-    else
-        sed -i '/^$varname=/d' "$configfile"
-    fi
+    local varname="$1"
+    local varvalue="$2"
+    local configfile="$3"
 
-    # Append new variable name and value to config.sh
-    echo "$varname=\"$varvalue\"" >> "$configfile"
+    local new_line="${varname}=\"${varvalue}\""
+    local lockfile="${configfile}.lock"
+
+    (
+        # acquire lock (portable)
+        exec 200>"$lockfile"
+        flock -n 200 || return 1
+
+        # remove ALL occurrences safely
+        if [[ "$(uname)" == "Darwin" ]]; then
+            sed -i '' "/^[[:space:]]*${varname}[[:space:]]*=/d" "$configfile"
+        else
+            sed -i "/^[[:space:]]*${varname}[[:space:]]*=/d" "$configfile"
+        fi
+
+        # append single clean value
+        echo "$new_line" >> "$configfile"
+
+    )
 }
 
 # ------------------------
@@ -67,7 +78,8 @@ update_config_variable() {
 # ------------------------
 log() {
     local level="${1:-INFO}"
-    local msg="${2:-}"
+    shift
+    local msg="$*"
     local level_upper
     level_upper=$(echo "$level" | tr '[:lower:]' '[:upper:]')
 
@@ -105,8 +117,11 @@ log() {
             ;;
     esac
 
-    # Print with timestamp and appropriate color
-    echo -e "[$(date '+%Y-%m-%d %H:%M:%S')] ${color}[$level_upper]${nc} $msg"
+    local timestamp
+    timestamp="$(date '+%Y-%m-%d %H:%M:%S')"
+    # Print with timestamp and appropriate color on terminal
+    echo -e "[${timestamp}] ${color}[$level_upper]${nc}"
+    echo -e "$msg"
 }
 
 # ------------------------
