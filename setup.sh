@@ -74,28 +74,28 @@ log "Info" "Loaded config from: $CONFIG_SH_PATH"
 log "Info" "Sourced common utilities from: $COMMON_SH_PATH"
 
 #Test Micromamba availability
-if ! command -v micromamba >/dev/null 2>&1; then
-    msg=$(cat << 'EOF'
+#if ! command -v micromamba >/dev/null 2>&1; then
+#    msg=$(cat << 'EOF'
 
-micromamba is not installed.
+#micromamba is not installed.
 
-To continue, run:
+#To continue, run:
 
-    bash <(curl -Ls https://micro.mamba.pm/install.sh)
+#    bash <(curl -Ls https://micro.mamba.pm/install.sh)
 
 
-Then restart your terminal (recommended),
-Or, reload your shell config:
+#Then restart your terminal (recommended),
+#Or, reload your shell config:
 
-    source ~/.bashrc   (bash)
-    source ~/.zshrc    (zsh)
+#    source ~/.bashrc   (bash)
+#    source ~/.zshrc    (zsh)
 
-Then re-run this script.
-EOF
-)
-    log "ERROR" "${msg}"
-    exit 1
-fi
+#Then re-run this script.
+#EOF
+#)
+#    log "ERROR" "${msg}"
+#    exit 1
+#fi
 
 # Default flags
 DO_SETUP_ENV=false
