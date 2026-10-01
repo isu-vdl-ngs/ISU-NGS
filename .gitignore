@@ -7,11 +7,12 @@ Thumbs.db
 *.bak
 *.swp
 *.tmp
+#*.txt
 
 # internal files / folders
+archive/
 analysis/
 db/
-data/
 envs/
 results/
 logs/

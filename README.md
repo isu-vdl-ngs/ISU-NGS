@@ -1,23 +1,82 @@
 # ISU-NGS Pipeline
-This public pipeline, part of the two pipelines (one as a blackbox), was developed as part of the project "Establishment of standardized NGS Sequencing, Data Analysis, and Reporting" awarded by FY2024 NAHLN Enhancement Project.
-The pipeline works on whole genome sequence data sequenced by Next-Generation Sequencing (NGS) platform Illumina.
+This public pipeline was developed as part of the project "Establishment of standardized NGS Sequencing, Data Analysis, and Reporting" awarded by FY2024 NAHLN Enhancement Project to Iowa State University's Veterinary Diagnostic Laboratory with Dr. Ganwu Li (Section Head - Next Generation Sequencing) as the PI.
+This grant was directed majorly towards bringing up the capacity and capability of small and medium sized NGS labs in the NAHLN network, though anyone interested in utilizing the protocols and pipelines are welcome.
 
+This public metagenomic pipeline is a stepping stone in that direction and to create an open-source driven community to learn from each other and improve upon this through collaborative work.
 
-This pipeline streamlines setup of a micromamba environment, kraken2 database and pipeline environment especially for diagnostic laboratories and research facilities with limited to no bioinformatics support.
+In its current state, this pipeline accepts whole genome sequencing paired-end data sequenced by Illumina MiSeq/MiSeq i100 platforms.
+Though, the plan is to upgrade it while working with like-minded researchers.
 
-It achieves all this while being minimalistic, highly modular, user requirement driven, reusable, portable, customizable, manageable, expandable while assisting in it being centralized and version controlled.
+This pipeline has been tested by our team and co-investigators on Linux-based systems and servers.
+It streamlines setup of a micromamba environment, kraken2 database and pipeline environment especially for diagnostic laboratories and research facilities with limited to no bioinformatics support.
+If working from a personal computer with minimal resources, update the kraken2\_db URL to mini kraken database in the config file and modify the memory and thread count accordingly (do provide minimum required memory to avoid kraken2 failure).
 
-## Citation
+This pipeline was designed utilizing best programming practices from my experience since late 2000s to make it highly configurable, modular, end-user requirement driven while targetting reproducibility through version control, reusability, portability, customizability, manageability and expansive. Generative AI was also utilized at certain stages, though unit and functional tests utilizing bottom-up approach.
+
+## Protocol.io
 
 ## Scripts included in ISU-NGS Pipeline
 
 ## Running Scripts:
-### Environment Setup:
-### Kraken2 Database Setup:
 
 ## setup.sh
+Run setup file to generate environment and generate database using Kraken2 DB as per your requirements or update database path variable in config file to a relative path of your kraken2 database
+
+`bash setup.sh`                  # same as --all: sets up both environment and Kraken2 DB (default when no flags given)
+`bash setup.sh --all`            # both, explicitly
+`bash setup.sh --show`           # print current environment path + Kraken2 DB directory contents
+`bash setup.sh -h|--help`      # help
+
+### Environment Setup:
+`bash setup.sh --env`            # set up/update the micromamba environment only, skip kraken2 db. If using personal database path, update `KRAKEN2\_DB\_PATH` variable in the config file with relative path to your own kraken2 database
+### Kraken2 Database Setup:
+`bash setup.sh --db`             # download/set up the Kraken2 database only
+
+## Samples for example run
+This package consists of and examples folder consisting of SRA.txt file consisting of the following public RNA and DNA samples
+SRR14417045: RNA-seq of porcine reproductive and respiratory syndrome virus-2
+SRR40076170: NGS\_PRRSV-2\_C27H21-E 
+SRR9617592: Illumina MiSeq of porcine circovirus 1: pig diarrhea feces
+
+## Steps to perform example run
+Follow the below steps after environment and/or database setup is complete.
+
+`mv examples data/`
+
+### if parallel command is available and desired (parallel will be installed in the environment by setup.sh)
+```
+parallel -j 4 'fasterq-dump --split-files {} && gzip {}_1.fastq {}_2.fastq' :::: SRA.txt
+```
+
+### if parallel not available or not desired
+```
+while read -r sra; do fasterq-dump --split-files "$sra" && gzip "${sra}_1.fastq" "${sra}_2.fastq"; done < SRA.txt
+```
 
 ## run.sh
 
+### generate work directory and template csv file for processing
+```
+bash run.sh --data examples --preprocess
+```
+
+### Perform trimming of low quality reads, FastQC/MultiQC, reads classification + krona plot generation
+```
+bash run.sh --data examples
+```
+
+### reads extraction for species of interest + de novo assembly
+### Note: only taxonomy rows with status=process are assembled
+```
+bash run.sh --data examples --taxonomy analysis/examples/taxonomy\_template.csv
+```
+
+Use other relevant flags like --no-trim | --no-fastqc | --no-extract as needed.
+
+### Pass command line arguments via a run configuration params file instead
+```
+bash run.sh --params config/run.params
+```
+
 ## Author Information
-Anugrah Saxena anugrah@iastate.edu Page Updated: 2025/09/18
+Anugrah Saxena anugrah@iastate.edu Page Updated: 2026/09/30

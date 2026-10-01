@@ -1,26 +1,24 @@
 #!/usr/bin/env bash
 
 ###############################################################################
-# Script Name: trim.sh
+# Script Name: scripts/trim.sh
 # Author:      Anugrah Saxena
 # Email:       anugrah@iastate.edu
 # Date:        2025-09-18
-# Description: NGS Illumina paired-end reads trimming.
-#              This script gets called based on the request of the user to trim
-#              raw sample reads from the `run.sh` script.
+# Description: Standalone wrapper for trimming a single sample's paired-end
+#              reads.
 #
 # Requirements:
 #   - Bash 4+
-#   - Conda/mamba environment with: trimmomatic.
-#   - NexteraPE-PE.fa
-#   - config.sh, common.sh
+#   - Conda/mamba environment with the configured trimmer (we are using trimmomatic)
+#   - config.sh, common.sh, lib/stages.sh, trim adapter
 #
-# Version:     1.0.0
+# Version:     2.0.0
 ###############################################################################
 
-if [[ $# -lt 5 ]]; then
-  echo "Usage: bash trim.sh <R1.fastq.gz> <R2.fastq.gz> <sample_id> <data_folder> <trim_folder> <config_sh_path>"
-  exit 1
+if [[ $# -lt 6 ]]; then
+    echo "Usage: bash trim.sh <R1.fastq.gz> <R2.fastq.gz> <sample_id> <data_folder> <trim_folder> <config_sh_path>"
+    exit 1
 fi
 
 R1_FASTQ="$1"
@@ -30,51 +28,42 @@ DATA_FOLDER="$4"
 TRIM_FOLDER="$5"
 CONFIG_SH_PATH="$6"
 
-# Load config and common utils
 if [[ -f "$CONFIG_SH_PATH" ]]; then
-  source "$CONFIG_SH_PATH"
+    source "$CONFIG_SH_PATH"
 else
-  echo "Error: Config file not found at $CONFIG_SH_PATH"
-  exit 1
+    echo "Error: Config file not found at $CONFIG_SH_PATH"
+    exit 1
 fi
 
-if [[ -f "$COMMON_SCRIPT" ]]; then
-  source "$COMMON_SCRIPT"
+if [[ -f "$PROJECT_ROOT/$COMMON_SCRIPT" ]]; then
+    source "$PROJECT_ROOT/$COMMON_SCRIPT"
 else
-  echo "Error: common.sh not found at $COMMON_SCRIPT"
-  exit 1
+    echo "Error: common.sh not found at $PROJECT_ROOT/$COMMON_SCRIPT"
+    exit 1
 fi
 
-# Activate environment
+if [[ -f "$PROJECT_ROOT/$STAGES_SCRIPT" ]]; then
+    source "$PROJECT_ROOT/$STAGES_SCRIPT"
+else
+    log "ERROR" "stages.sh not found at $PROJECT_ROOT/$STAGES_SCRIPT"
+    exit 1
+fi
+
+if [[ -z "${ENVIRONMENT_PATH:-}" || -z "${ENV_ACTIVATION_FILE:-}" ]]; then
+    log "ERROR" "Environment not set up. Run 'bash setup.sh --env' first."
+    exit 1
+fi
+
+# activate environment to perform trimming
 activate_env_from_file "$ENV_ACTIVATION_FILE"
 
-log "Run" "Running Trimmomatic for sample: $SAMPLE_ID"
+mkdir -p "$TRIM_FOLDER"
 
-# Output directory
-OUT_DIR="$TRIM_FOLDER/$SAMPLE_ID"
-mkdir -p "$OUT_DIR"
+if ! trim_sample "$R1_FASTQ" "$R2_FASTQ" "$SAMPLE_ID" "$TRIM_FOLDER"; then
+    log "ERROR" "Trimming failed for sample $SAMPLE_ID"
+    exit 1
+fi
 
-require_command "trimmomatic"
-
-# Output files
-TRIMMED_R1="$OUT_DIR/${SAMPLE_ID}_R1_trimmed.fastq.gz"
-TRIMMED_R2="$OUT_DIR/${SAMPLE_ID}_R2_trimmed.fastq.gz"
-UNPAIRED_R1="$OUT_DIR/${SAMPLE_ID}_FUP.fastq.gz"
-UNPAIRED_R2="$OUT_DIR/${SAMPLE_ID}_RUP.fastq.gz"
-
-# Run Trimmomatic PE
-trimmomatic PE -threads 8 -phred33 \
-  "$R1_FASTQ" "$R2_FASTQ" \
-  "$TRIMMED_R1" "$UNPAIRED_R1" \
-  "$TRIMMED_R2" "$UNPAIRED_R2" \
-  ILLUMINACLIP:"$PROJECT_ROOT/$TRIM_ADAPTERS_FILE":2:30:10:8:true \
-  LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36
-
-log "Info" "Trimmomatic ran for $SAMPLE_ID"
-
-# Output trimmed R1 and R2 for downstream steps
-echo "$TRIMMED_R1" "$TRIMMED_R2"
-
-log "Info" "Creating symlinks for sample $SAMPLE_ID trim files"
-ln -sf "$TRIMMED_R1" "$TRIM_FOLDER/$(basename "$TRIMMED_R1")"
-ln -sf "$TRIMMED_R2" "$TRIM_FOLDER/$(basename "$TRIMMED_R2")"
+# Output trimmed R1/R2 paths for any caller capturing stdout
+echo "$TRIM_FOLDER/$SAMPLE_ID/${SAMPLE_ID}_R1_trimmed.fastq.gz" \
+     "$TRIM_FOLDER/$SAMPLE_ID/${SAMPLE_ID}_R2_trimmed.fastq.gz"
