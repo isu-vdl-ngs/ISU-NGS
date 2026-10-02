@@ -141,34 +141,47 @@ parse_args() {
 normalize_and_group_samples() {
     local SAMPLE_DATA_PATH="$1"
 
-    local f
-    for f in "$SAMPLE_DATA_PATH"/*_1.fastq; do
-        [[ -e "$f" ]] || continue
-        log "Info" "Normalizing the raw data"
-        local base="${f%_1.fastq}"
-        mv "${base}_1.fastq" "${base}_R1.fastq"
-        mv "${base}_2.fastq" "${base}_R2.fastq"
-        gzip "${base}_R1.fastq"
-        gzip "${base}_R2.fastq"
-    done
+    local r1_file base sample_name sample_dir
 
-    local r1_file
-    for r1_file in "$SAMPLE_DATA_PATH"/*_R1*.fastq.gz; do
+    log "Info" "Normalizing and grouping the raw data"
+
+    # Handle *_1.fastq and *_1.fastq.gz
+    for r1_file in "$SAMPLE_DATA_PATH"/*_1.fastq "$SAMPLE_DATA_PATH"/*_1.fastq.gz; do
         [[ -e "$r1_file" ]] || continue
 
-        local filename sample_name sample_dir
-        filename=$(basename "$r1_file")
-        sample_name="${filename%%_R1*}"
+        if [[ "$r1_file" == *.fastq.gz ]]; then
+            base="${r1_file%_1.fastq.gz}"
+
+            # Already compressed: just rename
+            [[ -e "${base}_2.fastq.gz" ]] || continue
+            mv "$r1_file" "${base}_R1.fastq.gz"
+            mv "${base}_2.fastq.gz" "${base}_R2.fastq.gz"
+        else
+            base="${r1_file%_1.fastq}"
+
+            [[ -e "${base}_2.fastq" ]] || continue
+            mv "$r1_file" "${base}_R1.fastq"
+            mv "${base}_2.fastq" "${base}_R2.fastq"
+
+            gzip "${base}_R1.fastq"
+            gzip "${base}_R2.fastq"
+        fi
+    done
+
+    # Group R1/R2 files into sample-specific directories
+    for r1_file in "$SAMPLE_DATA_PATH"/*_R1.fastq.gz; do
+        [[ -e "$r1_file" ]] || continue
+
+        sample_name=$(basename "$r1_file" "_R1.fastq.gz")
         sample_dir="$SAMPLE_DATA_PATH/$sample_name"
+
         mkdir -p "$sample_dir"
 
-        mv "$SAMPLE_DATA_PATH/${sample_name}_R1"*.fastq.gz "$sample_dir/" 2>/dev/null || true
-        mv "$SAMPLE_DATA_PATH/${sample_name}_R2"*.fastq.gz "$sample_dir/" 2>/dev/null || true
+        mv "$SAMPLE_DATA_PATH/${sample_name}_R1.fastq.gz" "$sample_dir/"
+        mv "$SAMPLE_DATA_PATH/${sample_name}_R2.fastq.gz" "$sample_dir/"
     done
 }
 
-# Preprocess: create/update samples.csv and taxonomy_template.csv from the data folder
-# Note: new samples are added; existing rows/edits are never touched.
 generate_or_update_manifest() {
     local SAMPLE_DATA_PATH="$1"
     local SAMPLES_CSV="$2"
@@ -224,7 +237,7 @@ generate_or_update_manifest() {
         echo "sample_id,taxid,name,status" > "$TAXONOMY_CSV"
         local s
         for s in "${discovered[@]}"; do
-            echo "${s},,,skip" >> "$TAXONOMY_CSV"
+            echo "${s},,,process" >> "$TAXONOMY_CSV"
         done
     else
         log "Info" "taxonomy_template.csv already exists - preserving existing rows/edits, adding any new samples"
@@ -237,8 +250,8 @@ generate_or_update_manifest() {
 
         for s in "${discovered[@]}"; do
             if [[ -z "${have_tax[$s]:-}" ]]; then
-                log "Info" "New sample discovered: $s - adding a 'skip' row to taxonomy_template.csv"
-                echo "${s},,,skip" >> "$TAXONOMY_CSV"
+                log "Info" "New sample discovered: $s - adding a 'process' row to taxonomy_template.csv"
+                echo "${s},,,process" >> "$TAXONOMY_CSV"
             fi
         done
     fi
@@ -278,6 +291,7 @@ main() {
     CONFIG_SH_PATH="$PROJECT_ROOT/config/config.sh"
     if [[ -f "$CONFIG_SH_PATH" ]]; then
         source "$CONFIG_SH_PATH"
+        echo "Configuration sourced from $CONFIG_SH_PATH"
     else
         echo "Error: config.sh not found at $CONFIG_SH_PATH"
         echo "Please check if you have the latest version of the scripts"
@@ -300,8 +314,8 @@ main() {
         exit 1
     fi
 
-    mkdir -p "$PROJECT_ROOT/$SETUP_LOGS_DIR"
-    LOG_FILE="$PROJECT_ROOT/$SETUP_LOGS_DIR/run_$(date +%F_%H-%M-%S).log"
+    mkdir -p "$PROJECT_ROOT/$RUN_LOGS_DIR"
+    LOG_FILE="$PROJECT_ROOT/$RUN_LOGS_DIR/run_$(date +%F_%H-%M-%S).log"
     exec > >(tee -a "$LOG_FILE") 2>&1
 
     parse_args "$@"

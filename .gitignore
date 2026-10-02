@@ -12,8 +12,10 @@ Thumbs.db
 # internal files / folders
 archive/
 analysis/
+data/
 db/
 envs/
 results/
 logs/
 config/config.sh.lock
+setup/activation_steps.txt

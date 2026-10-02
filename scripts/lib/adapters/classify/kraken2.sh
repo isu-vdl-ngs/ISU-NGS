@@ -51,6 +51,7 @@ extract_adapter_kraken2() {
     local OUT_R2="$7"
 
     local CLASSIFY_FILE="$KDIR/${SAMPLE}_classify"
+    local REPORT_FILE="$KDIR/${SAMPLE}_report"
     if [[ ! -s "$CLASSIFY_FILE" ]]; then
         log "ERROR" "Expected Kraken2 classify file not found: $CLASSIFY_FILE (did the classify stage run for this sample?)"
         return 1
@@ -69,7 +70,10 @@ extract_adapter_kraken2() {
         -k "$CLASSIFY_FILE" \
         -s "$R1_PATH" -s2 "$R2_PATH" \
         -o "$TMP_R1" -o2 "$TMP_R2" \
-        --taxid "$TAXID" --fastq-output
+        --taxid "$TAXID" \
+        --include-children \
+        -r "$REPORT_FILE" \
+        --fastq-output
 
     if [[ ! -s "$TMP_R1" || ! -s "$TMP_R2" ]]; then
         log "ERROR" "extract_kraken_reads.py did not produce expected output: $TMP_R1 / $TMP_R2"
