@@ -1,0 +1,218 @@
+[2026-10-03 12:41:56] [0m[INFO][0m
+Normalizing and grouping the raw data
+[2026-10-03 12:41:56] [0m[INFO][0m
+samples.csv already exists - checking for newly added samples
+[2026-10-03 12:41:56] [0m[INFO][0m
+taxonomy_template.csv already exists - preserving existing rows/edits, adding any new samples
+[2026-10-03 12:41:56] [0m[INFO][0m
+Activating environment using commands from /work/liganwu/ngslab/ISU-NGS/setup/activation_steps.txt
+[2026-10-03 12:41:57] [0m[INFO][0m
+Environment activation verified at /work/liganwu/ngslab/ISU-NGS/envs/ngs1.0.0
+[2026-10-03 12:41:57] [0;32m[SUCCESS][0m
+Environment activated
+[2026-10-03 12:41:57] [0m[INFO][0m
+Trimming SRR14417045
+[2026-10-03 12:41:57] [1;34m[RUN][0m
+Running trimmer 'trimmomatic' for sample: SRR14417045
+TrimmomaticPE: Started with arguments:
+ -threads 4 -phred33 /work/liganwu/ngslab/ISU-NGS/data/examples/SRR14417045/SRR14417045_R1.fastq.gz /work/liganwu/ngslab/ISU-NGS/data/examples/SRR14417045/SRR14417045_R2.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR14417045/SRR14417045_R1_trimmed.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR14417045/SRR14417045_FUP.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR14417045/SRR14417045_R2_trimmed.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR14417045/SRR14417045_RUP.fastq.gz ILLUMINACLIP:/work/liganwu/ngslab/ISU-NGS/scripts/utils/NexteraPE-PE.fa:2:30:10:8:true LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36
+ILLUMINACLIP: Using adapter file from user-specified absolute path: /work/liganwu/ngslab/ISU-NGS/scripts/utils/NexteraPE-PE.fa
+Using PrefixPair: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT' and 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
+Using PrefixPair: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT' and 'TCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT'
+Using PrefixPair: 'AGATGTGTATAAGAGACAG' and 'AGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTCCGAGCCCACGAGAC'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTGACGCTGCCGACGA'
+Using Long Clipping Sequence: 'TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'GCCTCCCTCGCGCCATCAGAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'GCCTTGCCAGCCCGCTCAGAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCGGTTCAGCAGGAATGCCGAGA'
+Using Long Clipping Sequence: 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
+Using Long Clipping Sequence: 'TTTTTTTTTTAATGATACGGCGACCACCGAGATCTACAC'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTCTGATGGCGCGAGGGAGGC'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTCTGAGCGGGCTGGCAAGGC'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
+Using Long Clipping Sequence: 'TTTTTTTTTTCAAGCAGAAGACGGCATACGA'
+Using Long Clipping Sequence: 'GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'TCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT'
+ILLUMINACLIP: Using 3 prefix pairs, 16 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
+Input Read Pairs: 569790 Both Surviving: 533690 (93.66%) Forward Only Surviving: 18962 (3.33%) Reverse Only Surviving: 4780 (0.84%) Dropped: 12358 (2.17%)
+TrimmomaticPE: Completed successfully
+[2026-10-03 12:42:09] [0m[INFO][0m
+Trimming completed for SRR14417045
+[2026-10-03 12:42:09] [0m[INFO][0m
+Creating symlinks for sample SRR14417045 trim files
+[2026-10-03 12:42:09] [0m[INFO][0m
+Trimming SRR40076170
+[2026-10-03 12:42:09] [1;34m[RUN][0m
+Running trimmer 'trimmomatic' for sample: SRR40076170
+TrimmomaticPE: Started with arguments:
+ -threads 4 -phred33 /work/liganwu/ngslab/ISU-NGS/data/examples/SRR40076170/SRR40076170_R1.fastq.gz /work/liganwu/ngslab/ISU-NGS/data/examples/SRR40076170/SRR40076170_R2.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR40076170/SRR40076170_R1_trimmed.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR40076170/SRR40076170_FUP.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR40076170/SRR40076170_R2_trimmed.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR40076170/SRR40076170_RUP.fastq.gz ILLUMINACLIP:/work/liganwu/ngslab/ISU-NGS/scripts/utils/NexteraPE-PE.fa:2:30:10:8:true LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36
+ILLUMINACLIP: Using adapter file from user-specified absolute path: /work/liganwu/ngslab/ISU-NGS/scripts/utils/NexteraPE-PE.fa
+Using PrefixPair: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT' and 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
+Using PrefixPair: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT' and 'TCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT'
+Using PrefixPair: 'AGATGTGTATAAGAGACAG' and 'AGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTCCGAGCCCACGAGAC'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTGACGCTGCCGACGA'
+Using Long Clipping Sequence: 'TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'GCCTCCCTCGCGCCATCAGAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'GCCTTGCCAGCCCGCTCAGAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCGGTTCAGCAGGAATGCCGAGA'
+Using Long Clipping Sequence: 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
+Using Long Clipping Sequence: 'TTTTTTTTTTAATGATACGGCGACCACCGAGATCTACAC'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTCTGATGGCGCGAGGGAGGC'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTCTGAGCGGGCTGGCAAGGC'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
+Using Long Clipping Sequence: 'TTTTTTTTTTCAAGCAGAAGACGGCATACGA'
+Using Long Clipping Sequence: 'GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'TCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT'
+ILLUMINACLIP: Using 3 prefix pairs, 16 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
+Input Read Pairs: 183775 Both Surviving: 153140 (83.33%) Forward Only Surviving: 24012 (13.07%) Reverse Only Surviving: 385 (0.21%) Dropped: 6238 (3.39%)
+TrimmomaticPE: Completed successfully
+[2026-10-03 12:42:12] [0m[INFO][0m
+Trimming completed for SRR40076170
+[2026-10-03 12:42:12] [0m[INFO][0m
+Creating symlinks for sample SRR40076170 trim files
+[2026-10-03 12:42:12] [0m[INFO][0m
+Trimming SRR9617592
+[2026-10-03 12:42:12] [1;34m[RUN][0m
+Running trimmer 'trimmomatic' for sample: SRR9617592
+TrimmomaticPE: Started with arguments:
+ -threads 4 -phred33 /work/liganwu/ngslab/ISU-NGS/data/examples/SRR9617592/SRR9617592_R1.fastq.gz /work/liganwu/ngslab/ISU-NGS/data/examples/SRR9617592/SRR9617592_R2.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR9617592/SRR9617592_R1_trimmed.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR9617592/SRR9617592_FUP.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR9617592/SRR9617592_R2_trimmed.fastq.gz /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed/SRR9617592/SRR9617592_RUP.fastq.gz ILLUMINACLIP:/work/liganwu/ngslab/ISU-NGS/scripts/utils/NexteraPE-PE.fa:2:30:10:8:true LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36
+ILLUMINACLIP: Using adapter file from user-specified absolute path: /work/liganwu/ngslab/ISU-NGS/scripts/utils/NexteraPE-PE.fa
+Using PrefixPair: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT' and 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
+Using PrefixPair: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT' and 'TCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT'
+Using PrefixPair: 'AGATGTGTATAAGAGACAG' and 'AGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTCCGAGCCCACGAGAC'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTGACGCTGCCGACGA'
+Using Long Clipping Sequence: 'TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'GCCTCCCTCGCGCCATCAGAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'GCCTTGCCAGCCCGCTCAGAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCGGTTCAGCAGGAATGCCGAGA'
+Using Long Clipping Sequence: 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
+Using Long Clipping Sequence: 'TTTTTTTTTTAATGATACGGCGACCACCGAGATCTACAC'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTCTGATGGCGCGAGGGAGGC'
+Using Long Clipping Sequence: 'CTGTCTCTTATACACATCTCTGAGCGGGCTGGCAAGGC'
+Using Long Clipping Sequence: 'AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
+Using Long Clipping Sequence: 'TTTTTTTTTTCAAGCAGAAGACGGCATACGA'
+Using Long Clipping Sequence: 'GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG'
+Using Long Clipping Sequence: 'TCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT'
+ILLUMINACLIP: Using 3 prefix pairs, 16 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
+Input Read Pairs: 1141346 Both Surviving: 1072314 (93.95%) Forward Only Surviving: 42781 (3.75%) Reverse Only Surviving: 6206 (0.54%) Dropped: 20045 (1.76%)
+TrimmomaticPE: Completed successfully
+[2026-10-03 12:43:01] [0m[INFO][0m
+Trimming completed for SRR9617592
+[2026-10-03 12:43:01] [0m[INFO][0m
+Creating symlinks for sample SRR9617592 trim files
+[2026-10-03 12:43:01] [0m[INFO][0m
+Detecting FASTQ file pairs for raw FastQC input...
+[2026-10-03 12:43:01] [0m[INFO][0m
+Creating symlinks for sample SRR14417045
+[2026-10-03 12:43:01] [0m[INFO][0m
+Creating symlinks for sample SRR40076170
+[2026-10-03 12:43:01] [0m[INFO][0m
+Creating symlinks for sample SRR9617592
+[2026-10-03 12:43:01] [1;34m[RUN][0m
+Running FastQC (before_trim) on /work/liganwu/ngslab/ISU-NGS/analysis/examples/inputs
+application/gzip
+application/gzip
+application/gzip
+application/gzip
+application/gzip
+application/gzip
+[2026-10-03 12:43:18] [0m[INFO][0m
+FastQC (before_trim) completed. Output in /work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_before_trim
+[2026-10-03 12:43:18] [1;34m[RUN][0m
+Running MultiQC (before_trim) on /work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_before_trim
+
+/// MultiQC 🔍 v1.35
+
+       file_search | Search path: /work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_before_trim
+            fastqc | Found 6 reports
+     write_results | Data        : analysis/examples/multiqc_before_trim/multiqc_data
+     write_results | Report      : analysis/examples/multiqc_before_trim/multiqc_report.html
+           multiqc | MultiQC complete
+[2026-10-03 12:43:20] [1;34m[RUN][0m
+Running FastQC (after_trim) on /work/liganwu/ngslab/ISU-NGS/analysis/examples/trimmed
+application/gzip
+application/gzip
+application/gzip
+application/gzip
+application/gzip
+application/gzip
+[2026-10-03 12:43:34] [0m[INFO][0m
+FastQC (after_trim) completed. Output in /work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_after_trim
+[2026-10-03 12:43:34] [1;34m[RUN][0m
+Running MultiQC (after_trim) on /work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_after_trim
+
+/// MultiQC 🔍 v1.35
+
+       file_search | Search path: /work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_after_trim
+            fastqc | Found 6 reports
+     write_results | Data        : analysis/examples/multiqc_after_trim/multiqc_data
+     write_results | Report      : analysis/examples/multiqc_after_trim/multiqc_report.html
+           multiqc | MultiQC complete
+[2026-10-03 12:43:36] [0m[INFO][0m
+Running classifier 'kraken2' on SRR14417045
+Loading database information... done.
+569790 sequences (131.50 Mbp) processed in 1.853s (18446.6 Kseq/m, 4257.11 Mbp/m).
+  216042 sequences classified (37.92%)
+  353748 sequences unclassified (62.08%)
+[2026-10-03 12:43:38] [0m[INFO][0m
+Generating Krona plot for SRR14417045
+   [ WARNING ]  The following taxonomy IDs were not found in the local
+                database and were set to root (if they were recently added to
+                NCBI, use updateTaxonomy.sh to update the local database):
+                406552
+   [ WARNING ]  Too many query IDs to store in chart; storing supplemental
+                files in
+                '/work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR14417045_krona.html.files'.
+Loading taxonomy...
+Importing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR14417045_krona_input.txt...
+Writing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR14417045_krona.html...
+[2026-10-03 12:43:42] [0m[INFO][0m
+Running classifier 'kraken2' on SRR40076170
+Loading database information... done.
+183775 sequences (37.96 Mbp) processed in 0.480s (22952.1 Kseq/m, 4741.35 Mbp/m).
+  31080 sequences classified (16.91%)
+  152695 sequences unclassified (83.09%)
+[2026-10-03 12:43:43] [0m[INFO][0m
+Generating Krona plot for SRR40076170
+   [ WARNING ]  Too many query IDs to store in chart; storing supplemental
+                files in
+                '/work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR40076170_krona.html.files'.
+Loading taxonomy...
+Importing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR40076170_krona_input.txt...
+Writing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR40076170_krona.html...
+[2026-10-03 12:43:46] [0m[INFO][0m
+Running classifier 'kraken2' on SRR9617592
+Loading database information... done.
+1141346 sequences (572.96 Mbp) processed in 8.395s (8157.3 Kseq/m, 4094.96 Mbp/m).
+  921207 sequences classified (80.71%)
+  220139 sequences unclassified (19.29%)
+[2026-10-03 12:43:56] [0m[INFO][0m
+Generating Krona plot for SRR9617592
+   [ WARNING ]  Too many query IDs to store in chart; storing supplemental
+                files in
+                '/work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR9617592_krona.html.files'.
+Loading taxonomy...
+Importing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR9617592_krona_input.txt...
+Writing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR9617592_krona.html...
+[2026-10-03 12:44:05] [0m[INFO][0m
+Generating combined Krona plot for the project
+   [ WARNING ]  The following taxonomy IDs were not found in the local database and were set to root (if they were recently added to NCBI, use
+                updateTaxonomy.sh to update the local database): 406552
+   [ WARNING ]  Too many query IDs to store in chart; storing supplemental files in
+                '/work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/examples_all_combined.html.files'.
+Loading taxonomy...
+Importing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR14417045_krona_input.txt...
+Importing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR40076170_krona_input.txt...
+Importing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/SRR9617592_krona_input.txt...
+Writing /work/liganwu/ngslab/ISU-NGS/analysis/examples/kraken2/examples_all_combined.html...
+[2026-10-03 12:44:16] [0;32m[SUCCESS][0m
+run.sh completed for data folder: examples

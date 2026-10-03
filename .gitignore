@@ -10,6 +10,7 @@ Thumbs.db
 #*.txt
 
 # internal files / folders
+.mamba_root/
 archive/
 analysis/
 data/

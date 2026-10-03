@@ -1,0 +1,2 @@
+file                                                                                                                                 format  type  num_seqs  sum_len  min_len  avg_len  max_len
+/work/liganwu/ngslab/ISU-NGS/results/examples/SRR9617592/PorcineEpidemicDiarrheaVirus/SRR9617592_PorcineEpidemicDiarrheaVirus.fasta  FASTA   DNA          4   29,438      380  7,359.5   28,281

@@ -1,0 +1,16 @@
+[2026-10-03 12:14:40] [0m[INFO][0m
+Normalizing and grouping the raw data
+[2026-10-03 12:14:40] [0m[INFO][0m
+Creating samples.csv at /work/liganwu/ngslab/ISU-NGS/analysis/examples/samples.csv
+[2026-10-03 12:14:40] [0m[INFO][0m
+Creating taxonomy_template.csv at /work/liganwu/ngslab/ISU-NGS/analysis/examples/taxonomy_template.csv
+[2026-10-03 12:14:40] [0;32m[SUCCESS][0m
+Preprocessing complete for data folder: examples
+[2026-10-03 12:14:40] [0m[INFO][0m
+Review/edit /work/liganwu/ngslab/ISU-NGS/analysis/examples/taxonomy_template.csv : fill in taxid + name for samples you know, and set status to 'process' for rows you want extracted later.
+[2026-10-03 12:14:40] [0m[INFO][0m
+Then run one of:
+[2026-10-03 12:14:40] [0;36m[CMD][0m
+bash run.sh --data examples                                   # trim / QC / classify
+[2026-10-03 12:14:40] [0;36m[CMD][0m
+bash run.sh --data examples --taxonomy /work/liganwu/ngslab/ISU-NGS/analysis/examples/taxonomy_template.csv          # extract + assemble (after classification has run)

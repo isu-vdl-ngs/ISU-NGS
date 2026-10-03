@@ -1,0 +1,2 @@
+file                                                                                     format  type  num_seqs  sum_len  min_len  avg_len  max_len
+/work/liganwu/ngslab/ISU-NGS/results/examples/SRR40076170/Prrsv/SRR40076170_Prrsv.fasta  FASTA   DNA          6    4,986      479      831    1,270

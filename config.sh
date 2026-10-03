@@ -32,7 +32,7 @@ set -euo pipefail
 
 # Environment
 ENV_NAME="isu-ngs"
-VERSION="1.0.1"
+VERSION="1.0.0"
 
 # Tool Versions
 # Leave a version blank to install the latest available version for that tool which fulfills requisites.
@@ -98,3 +98,8 @@ THREADS="4"
 ASSEMBLY_MEM_GB="16"
 
 # Others
+PROJECT_ROOT="/work/liganwu/ngslab/ISU-NGS"
+ENVIRONMENT_ROOT="/work/liganwu/ngslab/ISU-NGS"
+ENVIRONMENT_PATH="/work/liganwu/ngslab/ISU-NGS/envs/ngs1.0.0"
+MAMBA_ROOT_PREFIX="/work/liganwu/ngslab/ISU-NGS/.mamba_root"
+ENV_ACTIVATION_FILE="/work/liganwu/ngslab/ISU-NGS/setup/activation_steps.txt"

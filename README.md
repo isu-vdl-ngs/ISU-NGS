@@ -14,6 +14,7 @@ If working from a personal computer with minimal resources, update the kraken2_d
 This pipeline was designed utilizing best programming practices from my experience since late 2000s to make it highly configurable, modular, end-user requirement driven while targetting reproducibility through version control, reusability, portability, customizability, manageability and expansive. Generative AI was also utilized at certain stages to further optimize the code, though several iterations of unit and functional tests utilizing bottom-up approach were performed.
 
 ## Protocol.io
+TBD
 
 ## Scripts included in ISU-NGS Pipeline
 
@@ -26,6 +27,8 @@ Run setup file to generate environment and generate database using Kraken2 DB as
 `bash setup.sh --all`            # both, explicitly
 `bash setup.sh --show`           # print current environment path + Kraken2 DB directory contents
 `bash setup.sh -h|--help`      # help
+
+You can check the setup logs in `outputs/install_run_logs`
 
 ### Environment Setup:
 `bash setup.sh --env`            # set up/update the micromamba environment only, skip kraken2 db. If using personal database path, update `KRAKEN2_DB_PATH` variable in the config file with relative path to your own kraken2 database
@@ -96,6 +99,8 @@ Use other relevant flags like --no-trim | --no-fastqc | --no-extract as needed.
 ```
 bash run.sh --params config/run.params
 ```
+
+You can check the run logs in `outputs/install_run_logs` and results in `outputs/example_outputs`.
 
 ## Author Information
 Anugrah Saxena anugrah@iastate.edu Page Updated: 2026/09/30

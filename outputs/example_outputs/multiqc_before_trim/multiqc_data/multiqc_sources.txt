@@ -1,0 +1,7 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	SRR9617592_R1	/work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_before_trim/SRR9617592_R1_fastqc.zip
+FastQC	all_sections	SRR9617592_R2	/work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_before_trim/SRR9617592_R2_fastqc.zip
+FastQC	all_sections	SRR14417045_R1	/work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_before_trim/SRR14417045_R1_fastqc.zip
+FastQC	all_sections	SRR14417045_R2	/work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_before_trim/SRR14417045_R2_fastqc.zip
+FastQC	all_sections	SRR40076170_R1	/work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_before_trim/SRR40076170_R1_fastqc.zip
+FastQC	all_sections	SRR40076170_R2	/work/liganwu/ngslab/ISU-NGS/analysis/examples/fastqc_before_trim/SRR40076170_R2_fastqc.zip
