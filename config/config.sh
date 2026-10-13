@@ -32,7 +32,7 @@ set -euo pipefail
 
 # Environment
 ENV_NAME="isu-ngs"
-VERSION="1.0.1"
+VERSION="1.0.2"
 
 # Tool Versions
 # Leave a version blank to install the latest available version for that tool which fulfills requisites.
