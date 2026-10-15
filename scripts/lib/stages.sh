@@ -132,7 +132,7 @@ run_fastqc_stage() {
     mkdir -p "$FASTQC_DIR" "$MULTIQC_DIR"
 
     log "Run" "Running FastQC ($LABEL) on $INPUT_DIR"
-    if ! fastqc -t "${THREADS:-4}" --quiet -o "$FASTQC_DIR" "${fastqs[@]}"; then
+    if ! fastqc -t "${THREADS:-4}" --quiet --outdir "$FASTQC_DIR" "${fastqs[@]}"; then
         log "Error" "FastQC ($LABEL) failed"
         return 1
     fi

@@ -1,11 +1,10 @@
 # ISU-NGS Pipeline
-This public pipeline was developed as part of the project "Establishment of standardized NGS Sequencing, Data Analysis, and Reporting" awarded by FY2024 NAHLN Enhancement Project to Iowa State University's Veterinary Diagnostic Laboratory with Dr. Ganwu Li (Section Head - Next Generation Sequencing) as the PI.
+This public pipeline was developed as part of the project "Establishment of standardized NGS Sequencing, Data Analysis, and Reporting" awarded by FY2024 NAHLN Enhancement Project to Iowa State University's Veterinary Diagnostic Laboratory (ISU-VDL) with Dr. Ganwu Li (Section Head - Next Generation Sequencing (NGS)) as the PI.
 This grant was directed majorly towards bringing up the capacity and capability of small and medium sized NGS labs in the NAHLN network, though anyone interested in utilizing the protocols and pipelines are welcome.
 
 This public metagenomic pipeline is a stepping stone in that direction and to create an open-source driven community to learn from each other and improve upon this through collaborative work.
 
-In its current state, this pipeline accepts whole genome sequencing paired-end data sequenced by Illumina MiSeq/MiSeq i100 platforms.
-Though, the plan is to upgrade it while working with like-minded researchers.
+In its current state, this pipeline accepts whole genome sequencing paired-end data sequenced by Illumina MiSeq/MiSeq i100 plus platforms. Presently, it hasn't been tested on other platform's data. Though, the plan is to upgrade it while working with like-minded researchers.
 
 This pipeline has been tested by our team and co-investigators on Linux-based systems and servers.
 It streamlines setup of a micromamba environment, kraken2 database and pipeline environment especially for diagnostic laboratories and research facilities with limited to no bioinformatics support.
@@ -18,7 +17,15 @@ TBD
 
 ## Video Tutorial
 Pipeline Setup/Installation:
+
+Note: based on release v1.0.11 and tag v1.0.3
+
+<a href="https://echo360.org/media/b2433-243-35-45-6/public" target="_blank">
+  <img src="https://echo360.org/media/b3624c8a-6e86-49ac-ac48-790bba6c0546/public" alt="Watch Video" width="600"/>
+</a>
+
 Pipeline Running:
+
 
 ## Scripts included in ISU-NGS Pipeline
 
@@ -30,7 +37,7 @@ Run setup file to generate environment and generate database using Kraken2 DB as
 `bash setup.sh`                  # same as --all: sets up both environment and Kraken2 DB (default when no flags given)
 `bash setup.sh --all`            # both, explicitly
 `bash setup.sh --show`           # print current environment path + Kraken2 DB directory contents
-`bash setup.sh -h|--help`      # help
+`bash setup.sh -h|--help`        # help
 
 You can check the setup logs from one of our recent installations in `outputs/install_run_logs`
 
@@ -42,9 +49,9 @@ You can check the setup logs from one of our recent installations in `outputs/in
 ## Samples for example run
 This package consists of and examples folder consisting of SRA.txt file consisting of the following public RNA and DNA samples <br>
 
-SRR14417045: RNA-seq of porcine reproductive and respiratory syndrome virus-2
-SRR40076170: NGS_PRRSV-2_C27H21-E 
-SRR9617592: Illumina MiSeq of porcine circovirus 1: pig diarrhea feces
+SRR14417045: RNA-seq of porcine reproductive and respiratory syndrome virus-2 <br>
+SRR40076170: NGS_PRRSV-2_C27H21-E <br>
+SRR9617592: Illumina MiSeq of porcine circovirus 1: pig diarrhea feces <br>
 
 ## Environment activation
 When you run the run.sh script for sequence data analysis, it will automatically activate the environment and rest will follow through.
@@ -68,6 +75,7 @@ Follow the below steps after environment and/or database setup is complete.
 `mv examples data/`
 
 Activate the environment and go to next steps.
+You can run the `ngsload` command to do the same.
 
 ### if parallel command is available and desired (parallel will be installed in the environment by setup.sh)
 ```
@@ -109,7 +117,11 @@ You can check the run logs in `outputs/install_run_logs` and results in `outputs
 ## Author Information
 Anugrah Saxena anugrah@iastate.edu Page Updated: 2026/10/13
 
+## Thank you
+Special thanks to Dr. Kathy Hulsebus, Dr. Xiao Hu, Fazal Sattar and Harika Nalika from ISU-VDL NGS Section, Dr. Zhenyu Shen (University of Missouri), Dr. Leyi Wang (University of Illinois Urbana-Champaign), Dr. Lifang Yan (Mississippi State University), Dr. Ellen Ruth A. Alexander (Texas A&M University) for testing the pipeline at multiple stages, providing suggestions for enhancements, working along with me for troubleshooting across different user systems to make sure that it works as expected. In addition, thanks to our other co-investigators Dr. Ailam Lim (University of Wisconsin-Madison), Dr. Susan Sanchez (University of Georgia), Dr. Kiril Dimitrov (Texas A&M University) and Principal Investogator Dr. Ganwu Li (ISU).
+
 ## Disclaimer
 This pipeline was designed utilizing best programming practices from my experience since late 2000s to make it highly configurable, modular, end-user requirement driven while targetting reproducibility through version control, reusability, portability, customizability, manageability and expansive. Generative AI was also utilized at certain stages to further optimize the code, though several iterations of unit and functional tests utilizing bottom-up approach were performed.
+
 It will be my pleasure to work with other like-minded individuals to make it better.
 I look forward to any comments, suggestions, reviews, etc.
