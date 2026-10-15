@@ -20,9 +20,10 @@ Pipeline Setup/Installation:
 
 Note: based on release v1.0.11 and tag v1.0.3
 
-<a href="https://echo360.org/media/b2433-243-35-45-6/public" target="_blank">
+<a href="https://echo360.org/media/b3624c8a-6e86-49ac-ac48-790bba6c0546/public" target="_blank">
   <img src="https://echo360.org/media/b3624c8a-6e86-49ac-ac48-790bba6c0546/public" alt="Watch Video" width="600"/>
 </a>
+<br>
 
 Pipeline Running:
 
